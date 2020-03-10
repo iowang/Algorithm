@@ -1,3 +1,4 @@
+// 队列的调度类似于操作系统的轮转调度算法
 #include<iostream>
 #include<queue>
 #include<string>
