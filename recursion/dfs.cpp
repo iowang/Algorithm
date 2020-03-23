@@ -6,6 +6,7 @@ using namespace std;
 int maxvalue,w,n;
 const int maxn=1000;
 int W[maxn],V[maxn];
+/*
 void DFS(int index,int value,int weight){
     if(index==n){
         if(value>maxvalue&&weight<=w){
@@ -16,6 +17,25 @@ void DFS(int index,int value,int weight){
     DFS(index+1,value,weight);//不选择第index件物品
     DFS(index+1,value+V[index],weight+W[index]);//选择第index件物品
 }
+*/
+// 上面方法复杂度是指数级别的，因此需要进行剪枝
+
+void DFS(int index,int value,int weight){
+    if(index==n){
+        if(value>maxvalue&&weight<=w){
+            maxvalue=value;
+        }
+        return ;
+    }
+    DFS(index+1,value,weight);//不选择第index件物品
+    if(weight+W[index]<=w){
+        if(value+V[index]>maxvalue){
+            maxvalue=value+V[index];
+        }
+        DFS(index+1,value+V[index],weight+W[index]);//选择第index件物品
+    }
+}
+
 int main()
 {
     cin>>n>>w;
